@@ -11,16 +11,17 @@ import { RouterService } from '../services/router.service';
 })
 export class EditNoteOpenerComponent implements OnInit {
   
-  constructor(private dialog: MatDialog, private activatedRoute: ActivatedRoute, private routerService : RouterService){
+  constructor(public dialog: MatDialog, public activatedRoute: ActivatedRoute, private routerService : RouterService){
     const id = +this.activatedRoute.snapshot.paramMap.get('noteId');
 
     this.dialog.open(EditNoteViewComponent, {
       data:{
         noteId: id
       }
-    }).afterClosed().subscribe(result=>{
-      this.routerService.routeBack();
     })
+  //   .afterClosed().subscribe(result=>{
+  //     this.routerService.routeBack();
+  //   })
    }
   
   ngOnInit() {

@@ -36,6 +36,7 @@ export class EditNoteViewComponent implements OnInit, OnDestroy {
         // if (error.status === 403) {
         //   this.submitMessage = 'Unauthorized';
         // }
+        this.errMessage = error.message;
     });
   }
 }

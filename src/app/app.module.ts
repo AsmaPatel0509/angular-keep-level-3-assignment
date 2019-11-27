@@ -35,10 +35,6 @@ import { EditNoteViewComponent } from './edit-note-view/edit-note-view.component
 import { ListViewComponent } from './list-view/list-view.component';
 
 const routes: Routes = [
-  {
-    path: '', component: DashboardComponent,
-
-  },
   { path: 'login', component: LoginComponent },
   {
     path: 'dashboard', 

@@ -7,32 +7,35 @@ import { RouterService } from '../services/router.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit{
-  submitMessage:string;
-  username:FormControl;
-  password:FormControl;
-  constructor(private authservice:AuthenticationService, private routerservice:RouterService){}
-  loginform=new FormGroup({
-    username :new FormControl('', Validators.required),
-    password : new FormControl('', [Validators.required, Validators.minLength(6)])
-  })
-    ngOnInit()
-    {
-    }
-    loginSubmit() {
-      console.log(this.loginform.value);
-      this.authservice.authenticateUser(this.loginform.value).subscribe(data=>{
-        console.log(data);
-        this.authservice.setBearerToken(data['token']);
-        this.routerservice.routeToDashboard();
-      },
-      error => {
-        if (error.status === 404) {
-          this.submitMessage = 'Http failure response for http://localhost:3000/auth/v1: 404 Not Found';
-        }
-        if (error.status === 403) {
-          this.submitMessage = 'Unauthorized';
-        }
+export class LoginComponent implements OnInit {
+  loginForm: FormGroup;
+  username = new FormControl();
+  password = new FormControl();
+  submitMessage: string;
+  constructor(private authService: AuthenticationService, private routerService: RouterService) { }
+  ngOnInit() {
+     this.username = new FormControl('', [Validators.required]),
+      this.password = new FormControl('', [Validators.required, Validators.minLength(6)]);
+      this.loginForm = new FormGroup ({
+          username: this.username,
+          password: this.password
       });
-    }
+  }
+  loginSubmit() {
+    console.log(this.loginForm.value);
+    // console.log("Inside SignIN");
+    this.authService.authenticateUser(this.loginForm.value).subscribe(
+      data => {
+    console.log(data);
+     this.authService.setBearerToken(data['token']);
+     this.routerService.routeToDashboard();
+    },
+    error => {
+      if (error.status === 404) {
+        this.submitMessage = 'Http failure response for http://localhost:3000/auth/v1: 404 Not Found'; }
+     if (error.status === 403) {
+        this.submitMessage = 'Unauthorized';
+     }
+    });
+   }
 }

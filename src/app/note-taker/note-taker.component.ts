@@ -11,6 +11,9 @@ export class NoteTakerComponent {
   note: Note = new Note();
   errMessage: string;
   notes: Array<Note> = [];
+  title: string;
+  text: string;
+  id:number;
 
   constructor(private noteservice: NotesService) {
 
@@ -32,4 +35,3 @@ export class NoteTakerComponent {
     this.note.title = '';
   }
 }
-
