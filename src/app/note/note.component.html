@@ -1,0 +1,4 @@
+<mat-card *ngFor="let item of notes" (click) = "editNote()">
+    <mat-card-title>{{item.title}}</mat-card-title>
+    <mat-card-content>{{item.text}}</mat-card-content>
+</mat-card>

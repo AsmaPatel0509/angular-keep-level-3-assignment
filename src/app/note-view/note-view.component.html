@@ -1,5 +1,3 @@
-<div class="keep-c-note-container">
-  
-	<!-- Include the notes collection with each note rendered as a separate NoteComponent -->
-
-</div>
+<section>
+    <app-note [note] = "mynote" *ngFor = "let mynote of notes"></app-note>
+</section>

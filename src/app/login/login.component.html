@@ -1,0 +1,15 @@
+<div class="form-container">
+    <form [formGroup]="loginform" (ngSubmit)="loginSubmit()">
+        <label>
+            User Name :
+        </label>
+        <input type="text" [formControl]="username" class="username">
+        <br />
+        <label>
+            Password :
+        </label>
+        <input type="text" [formControl]="password" class="password">
+        <button type="submit" [disabled]='!loginform.valid'>Submit</button>
+    </form>
+    <strong *ngIf="submitMessage" class="error-message">{{submitMessage}}</strong>
+</div>
