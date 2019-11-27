@@ -36,7 +36,7 @@ import { ListViewComponent } from './list-view/list-view.component';
 
 const routes: Routes = [
   {
-    path: '', component: DashboardComponent
+    path: '', component: DashboardComponent,
 
   },
   { path: 'login', component: LoginComponent },
@@ -68,7 +68,9 @@ const routes: Routes = [
 
 
 @NgModule({
-  declarations: [HeaderComponent, 
+  declarations: [
+    AppComponent,
+    HeaderComponent, 
     DashboardComponent, 
     LoginComponent, 
     NoteComponent, 
@@ -76,7 +78,9 @@ const routes: Routes = [
     NoteViewComponent,
     EditNoteOpenerComponent,
     EditNoteViewComponent,
-    ListViewComponent],
+    ListViewComponent
+  ],
+
   imports: [MatToolbarModule,
     MatExpansionModule,
     BrowserModule,

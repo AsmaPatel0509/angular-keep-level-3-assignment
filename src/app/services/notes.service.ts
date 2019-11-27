@@ -10,6 +10,7 @@ export class NotesService {
 
   notes: Array<Note>;
   notesSubject: BehaviorSubject<Array<Note>> = new BehaviorSubject(this.notes);
+  submitMessage: string;
 
   constructor(private httpClient: HttpClient, private authService: AuthenticationService){}
 
@@ -20,6 +21,14 @@ export class NotesService {
       (data) => {
         this.notes=data;
         this.notesSubject.next(this.notes);
+      },
+      error => {
+        if (error.status === 404) {
+          this.submitMessage = 'Http failure response for http://localhost:3000/api/v1/notes: 404 Not Found';
+        }
+        if (error.status === 403) {
+          this.submitMessage = 'Unauthorized';
+        }
       }
     );
 
