@@ -1,105 +1,91 @@
-import { NgModule } from '@angular/core';
-
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { HeaderComponent } from './header/header.component';
 import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { MatButtonModule } from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { MatIconModule } from '@angular/material/icon';
-import { FormsModule } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSelectModule } from '@angular/material';
-import { MatInputModule } from '@angular/material';
-import { ReactiveFormsModule } from '@angular/forms';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatRadioModule } from '@angular/material/radio';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule } from '@angular/material';
+import { MatListModule, MatSelectModule, MatDialogModule } from '@angular/material';
+import { HeaderComponent } from './header/header.component';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { HttpClientModule } from '@angular/common/http';
-import { HttpModule } from '@angular/http';
-import { RouterModule, Routes } from '@angular/router';
+import { MatCardModule } from '@angular/material/card';
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { RouterModule, Routes } from '@angular/router';
 import { CanActivateRouteGuard } from './can-activate-route.guard';
-import { AuthenticationService } from './services/authentication.service';
 import { NotesService } from './services/notes.service';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { AuthenticationService } from './services/authentication.service';
 import { RouterService } from './services/router.service';
-import { NoteComponent } from './note/note.component';
-import { NoteTakerComponent } from './note-taker/note-taker.component';
 import { NoteViewComponent } from './note-view/note-view.component';
-import { EditNoteOpenerComponent } from './edit-note-opener/edit-note-opener.component';
 import { EditNoteViewComponent } from './edit-note-view/edit-note-view.component';
 import { ListViewComponent } from './list-view/list-view.component';
-
-const routes: Routes = [
+import { NoteTakerComponent } from './note-taker/note-taker.component';
+import { NoteComponent } from './note/note.component';
+import { EditNoteOpenerComponent } from './edit-note-opener/edit-note-opener.component';
+const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   {
-    path: 'dashboard', 
-    component: DashboardComponent, 
-    canActivate: [CanActivateRouteGuard],
-    children: [
+    path: 'dashboard', component: DashboardComponent, canActivate: [CanActivateRouteGuard], children: [
       {
-        path: 'view/noteview',
-        component: NoteViewComponent
+        path: 'view/noteview', component: NoteViewComponent
       },
       {
-        path: 'view/listview',
-        component: ListViewComponent
+        path: 'view/listview', component: ListViewComponent
       },
       {
-        path: '',
-        redirectTo: 'view/noteview',
-        pathMatch: 'full'
-      },
-      {
-        path: 'note/:noteId/edit',
-        component: EditNoteViewComponent,
+        path: 'note/:noteId/edit', component: EditNoteOpenerComponent,
         outlet: 'noteEditOutlet'
+      },
+      {
+        path: '', redirectTo: 'view/noteview', pathMatch: 'full'
       }
     ]
-  }];
-
-
+  }
+  // { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
+];
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent, 
-    DashboardComponent, 
-    LoginComponent, 
-    NoteComponent, 
-    NoteTakerComponent,
-    NoteViewComponent,
+    HeaderComponent,
+    LoginComponent,
+    DashboardComponent,
     EditNoteOpenerComponent,
-    EditNoteViewComponent,
-    ListViewComponent
+    ListViewComponent,
+    NoteViewComponent,
+    NoteTakerComponent,
+    NoteComponent,
+    EditNoteViewComponent
   ],
-
-  imports: [MatToolbarModule,
-    MatExpansionModule,
+  imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    MatFormFieldModule,
-    FormsModule,
-    ReactiveFormsModule,
+    LayoutModule,
+    MatToolbarModule,
     MatButtonModule,
-    MatButtonToggleModule,
-    MatCardModule,
-    MatRadioModule,
-    MatCheckboxModule,
+    MatSidenavModule,
     MatIconModule,
+    MatListModule,
+    MatExpansionModule,
+    MatFormFieldModule,
     MatInputModule,
-    MatSelectModule,
     HttpClientModule,
-    HttpModule,
-    RouterModule.forRoot(routes),
-    MatPaginatorModule
+    MatCardModule,
+    FormsModule,
+    RouterModule.forRoot(appRoutes),
+    ReactiveFormsModule,
+    MatSelectModule,
+    MatDialogModule,
   ],
-  providers: [AuthenticationService, CanActivateRouteGuard, NotesService, RouterService],
+  providers: [NotesService,
+    AuthenticationService,
+    RouterService,
+    CanActivateRouteGuard
+  ],
   bootstrap: [AppComponent],
   entryComponents: [EditNoteViewComponent]
 })
-
 export class AppModule { }

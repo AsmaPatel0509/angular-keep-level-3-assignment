@@ -1,28 +1,21 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Note } from '../note';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { Observable } from '../../../node_modules/rxjs/Observable';
+import { HttpHeaders, HttpClient } from '../../../node_modules/@angular/common/http';
 import { AuthenticationService } from './authentication.service';
-import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/observable/from';
-
-
 @Injectable()
-export class NotesService implements OnInit{
-  ngOnInit(): void {
-    throw new Error("Method not implemented.");
-  }
-
+export class NotesService implements OnInit {
   notes: Array<Note>;
   notesSubject: BehaviorSubject<Array<Note>>;
-  
-
-  constructor(private http: HttpClient, private authService: AuthenticationService){
-    this.notes = [];
-    this.notesSubject = new BehaviorSubject([]);
-  }
-
+  constructor(private http: HttpClient,
+    private authService: AuthenticationService) {
+      this.notes = [];
+      this.notesSubject = new BehaviorSubject([]);
+    }
+    ngOnInit() {}
   fetchNotesFromServer() {
     this.http.get<Array<Note>>('http://localhost:3000/api/v1/notes', {
       headers : new HttpHeaders().set('Authorization', `Bearer ${this.authService.getBearerToken()}`)
@@ -55,7 +48,7 @@ editNote(note: Note): Observable<Note> {
   }
 getNoteById(noteId): Note {
     // const c = parseInt(noteId);
-    const note= this.notes.find(note => note.id === noteId);
-    return Object.assign({},note);
+    const note = this.notes.find(note => note.id === noteId);
+    return Object.assign({}, note);
   }
 }

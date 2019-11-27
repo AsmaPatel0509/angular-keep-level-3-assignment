@@ -20,8 +20,7 @@ export class HeaderComponent {
     if (this.isNoteView) {
     this.routerService.routeToListView();
     this.isNoteView = false;
-    }
-    else {
+    } else {
     this.routerService.routeToNoteView();
     this.isNoteView = true;
     }

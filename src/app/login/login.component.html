@@ -1,26 +1,26 @@
 <form [formGroup] = "loginForm" (ngSubmit)="loginSubmit()">
-    <div>
-        <label for="username">UserName: </label>
-        <input class="username" matInput type="text" placeholder="Enter user name" formControlName="username">
-        <small *ngIf="username.invalid && (username.dirty || username.touched)">
-          Username is a Mandatory Field
+  <div>
+      <label for="username">UserName: </label>
+      <input class="username" matInput type="text" placeholder="Enter user name" formControlName="username">
+      <small *ngIf="username.invalid && (username.dirty || username.touched)">
+        Username is a Mandatory Field
+      </small>
+  </div>
+  <div>
+      <label for="password">Password: </label>
+      <input class="password" matInput type="password" placeholder="Enter the password" formControlName="password">
+      <small *ngIf="password.invalid && (password.dirty || password.touched)">
+        <small *ngIf="password.errors.required">
+          Password cannot be left blank !!
         </small>
-    </div>
-    <div>
-        <label for="password">Password: </label>
-        <input class="password" matInput type="password" placeholder="Enter the password" formControlName="password">
-        <small *ngIf="password.invalid && (password.dirty || password.touched)">
-          <small *ngIf="password.errors.required">
-            Password cannot be left blank !!
-          </small>
-          <small *ngIf="password.errors.minlength">
-            Password Must Have MInimum 6 Characters !!
-          </small>
+        <small *ngIf="password.errors.minlength">
+          Password Must Have MInimum 6 Characters !!
         </small>
-    </div>
-    <div>
-        <!-- <button value="Sign In">Sign In</button> -->
-        <button type="submit" mat-button [disabled]="!loginForm.valid">Submit</button>
-    </div>
-  </form>
-  <strong *ngIf="submitMessage" class="error-message">{{submitMessage}}</strong>
+      </small>
+  </div>
+  <div>
+      <!-- <button value="Sign In">Sign In</button> -->
+      <button type="submit" mat-button [disabled]="!loginForm.valid">Submit</button>
+  </div>
+</form>
+<strong *ngIf="submitMessage" class="error-message">{{submitMessage}}</strong>

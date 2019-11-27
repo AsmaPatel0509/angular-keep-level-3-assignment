@@ -1,5 +1,19 @@
-<div class="keep-c-note-container">
-    <!-- Include the notes collection with each note rendered as a separate NoteComponent -->
-    <app-note [note] = "mynote" *ngFor = "let mynote of notes"></app-note>
-</div>
 
+<div class="keep-c-note-container">
+  
+	<!-- Include the notes collection with each note rendered as a separate NoteComponent -->
+
+</div>
+<div class="keep-c-note-container">
+	<!-- Include the notes collection with each note rendered as a separate NoteComponent -->
+	<!-- <section>
+		<mat-card *ngFor="let item of notes">
+			<mat-card-title>{{item.title}}</mat-card-title>
+			<mat-card-content>{{item.text}}</mat-card-content> -->
+			<!--<button (click)="editnote()">Edit</button>-->
+		<!-- </mat-card>
+	  </section>
+</div> -->
+<div>
+	<app-note [note]="note" *ngFor="let note of notes"></app-note>
+</div>
