@@ -68,7 +68,15 @@ const routes: Routes = [
 
 
 @NgModule({
-  declarations: [HeaderComponent, DashboardComponent, LoginComponent, NoteComponent],
+  declarations: [HeaderComponent, 
+    DashboardComponent, 
+    LoginComponent, 
+    NoteComponent, 
+    NoteTakerComponent,
+    NoteViewComponent,
+    EditNoteOpenerComponent,
+    EditNoteViewComponent,
+    ListViewComponent],
   imports: [MatToolbarModule,
     MatExpansionModule,
     BrowserModule,
@@ -87,12 +95,7 @@ const routes: Routes = [
     HttpClientModule,
     HttpModule,
     RouterModule.forRoot(routes),
-    MatPaginatorModule,
-    NoteTakerComponent,
-    NoteViewComponent,
-    EditNoteOpenerComponent,
-    EditNoteViewComponent,
-    ListViewComponent
+    MatPaginatorModule
   ],
   providers: [AuthenticationService, CanActivateRouteGuard, NotesService, RouterService],
   bootstrap: [AppComponent],
